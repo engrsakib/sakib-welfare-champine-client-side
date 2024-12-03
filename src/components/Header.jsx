@@ -87,7 +87,10 @@ const Header = () => {
               {links}
             </ul>
           </div>
-          <Link to={`/`} className={`text-2xl ${dark ? "text-gray-50" : "text-gray-800"}`}>
+          <Link
+            to={`/`}
+            className={`text-2xl ${dark ? "text-gray-50" : "text-gray-800"}`}
+          >
             Sakib welfare
           </Link>
         </div>
@@ -127,8 +130,8 @@ const Header = () => {
           {/* profile img end */}
           {/* button start */}
           <div className="join join-vertical lg:join-horizontal">
-            <Link className="btn join-item">LogIn</Link>
-            <Link className="btn join-item">SignUp</Link>
+            <Link to={`/auth/login`} className="btn join-item">LogIn</Link>
+            <Link to={`/auth/regester`} className="btn join-item">SignUp</Link>
           </div>
           {/* button end */}
 
