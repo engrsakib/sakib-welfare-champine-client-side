@@ -47,19 +47,42 @@ const Register = () => {
     console.log("Form Submitted:", formData);
     const mail = formData.email;
     const password = formData.password;
+
     crateMailPassword(mail, password)
       .then((userCredential) => {
         // Signed up
         const user = userCredential.user;
-        console.log(user)
-        
-        // ...
+        console.log(user);
+
+        // save info to the dataBase
+        const name = formData.name;
+        const photo = formData.photoUrl;
+        // console.log(name)
+        const newUser = {
+          name,
+          mail,
+          photo,
+          crateDate: user?.metadata?.creationTime,
+          lastSignInDate: user?.metadata?.lastSignInTime,
+        };
+
+        fetch("http://localhost:5000/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(newUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+          });
       })
       .catch((error) => {
         // const errorCode = error.code;
         // const errorMessage = error.message;
         // console.log(errorCode, errorMessage);
-        toast.warning("Your mail is all ready exsit")
+        toast.warning("Your mail is all ready exsit");
         // ..
       });
   };
