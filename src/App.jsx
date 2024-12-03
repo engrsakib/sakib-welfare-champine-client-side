@@ -12,6 +12,12 @@ function App() {
       <header className='container mx-auto'>
         <Header></Header>
       </header>
+      <main className='container mx-auto'>
+        
+      </main>
+      <footer>
+        
+      </footer>
     </>
   )
 }

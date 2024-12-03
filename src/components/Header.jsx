@@ -1,7 +1,64 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../provider/AuthProvider";
+import { GoSun } from "react-icons/go";
+import { FaMoon } from "react-icons/fa";
 
 const Header = () => {
+  const {setdark, dark} = useContext(AuthContext)
+  const handletheme = ()=>{
+    setdark(!dark)
+  }
+  const links = (
+    <>
+      <NavLink
+        to="/"
+        className={({ isActive }) =>
+          `px-4 py-2 rounded ${
+            isActive ? "bg-green-500" : "bg-transparent hover:bg-red-400"
+          } ${dark ? "text-gray-50" : "text-gray-800"}`
+        }
+      >
+        Home
+      </NavLink>
+      <NavLink
+        className={({ isActive }) =>
+          `px-4 py-2 rounded ${
+            isActive
+              ? "bg-green-500 text-white"
+              : "bg-transparent hover:bg-red-400"
+          } ${dark ? "text-gray-50" : "text-gray-800"}`
+        }
+        to={`/donation/all-campagion`}
+      >
+        All Campaign
+      </NavLink>
+      <NavLink
+        className={({ isActive }) =>
+          `px-4 py-2 rounded ${
+            isActive
+              ? "bg-green-500 text-white"
+              : "bg-transparent hover:bg-red-400"
+          } ${dark ? "text-gray-50" : "text-gray-800"}`
+        }
+        to={`/donation/my-campagion`}
+      >
+        My Campaign
+      </NavLink>
+      <NavLink
+        className={({ isActive }) =>
+          `px-4 py-2 rounded ${
+            isActive
+              ? "bg-green-500 text-white"
+              : "bg-transparent hover:bg-red-400"
+          } ${dark ? "text-gray-50" : "text-gray-800"}`
+        }
+        to={`/donation/my-donation`}
+      >
+        My Donation
+      </NavLink>
+    </>
+  );
   return (
     <>
       <div className="navbar bg-base-100">
@@ -27,49 +84,15 @@ const Header = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
-              <li>
-                <a>Item 1</a>
-              </li>
-              <li>
-                <a>Parent</a>
-                <ul className="p-2">
-                  <li>
-                    <a>Submenu 1</a>
-                  </li>
-                  <li>
-                    <a>Submenu 2</a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a>Item 3</a>
-              </li>
+              {links}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">daisyUI</a>
+          <Link to={`/`} className={`text-2xl ${dark ? "text-gray-50" : "text-gray-800"}`}>
+            Sakib welfare
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <details>
-                <summary>Parent</summary>
-                <ul className="p-2">
-                  <li>
-                    <a>Submenu 1</a>
-                  </li>
-                  <li>
-                    <a>Submenu 2</a>
-                  </li>
-                </ul>
-              </details>
-            </li>
-            <li>
-              <a>Item 3</a>
-            </li>
-          </ul>
+          <ul className="menu menu-horizontal px-1 space-x-6">{links}</ul>
         </div>
         <div className="navbar-end">
           {/* profile image */}
@@ -97,9 +120,6 @@ const Header = () => {
                 </a>
               </li>
               <li>
-                <a>Settings</a>
-              </li>
-              <li>
                 <a>Logout</a>
               </li>
             </ul>
@@ -111,6 +131,19 @@ const Header = () => {
             <Link className="btn join-item">SignUp</Link>
           </div>
           {/* button end */}
+
+          {/* theme controlat start */}
+          <div className="flex items-center gap-2">
+            <button onClick={handletheme}>
+              {dark ? (
+                <GoSun className="text-yellow-400 text-2xl" />
+              ) : (
+                <FaMoon className="text-indigo-950 text-2xl" />
+              )}
+            </button>
+          </div>
+
+          {/* theme controlat end */}
         </div>
       </div>
     </>
