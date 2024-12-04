@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../provider/AuthProvider";
 
 const LogIn = () => {
+  const{dark} = useContext(AuthContext);
   const [formData, setFormData] = useState({
     mail: "",
     password: "",
@@ -26,10 +28,18 @@ const LogIn = () => {
   return (
     <>
       <div className="flex flex-col justify-center items-center min-h-screen">
-        <div className="relative bg-white p-8 rounded-lg shadow-md w-[100%] md:w-[60%]">
+        <div
+          className={`relative ${
+            dark ? "border border-yellow-300" : "bg-white"
+          } p-8 rounded-lg shadow-md  max-w-md w-full`}
+        >
           {/* Lock Icon */}
           <div className="absolute -top-16 left-1/2 transform -translate-x-1/2"></div>
-          <h2 className="text-center text-lg font-bold text-gray-800 mb-6">
+          <h2
+            className={`text-center text-xl font-bold mb-6 ${
+              dark ? "text-gray-200" : "text-gray-800"
+            }`}
+          >
             USER LOGIN
           </h2>
           <form onSubmit={handleSubmit}>
@@ -93,7 +103,7 @@ const LogIn = () => {
             <p className="text-sm text-gray-600">
               Don't have an account?{" "}
               <Link
-                to={`/auth/regester`}
+                to={`/auth/register`}
                 className="text-blue-500 hover:underline font-semibold"
               >
                 Register

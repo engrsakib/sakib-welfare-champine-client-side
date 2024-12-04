@@ -3,9 +3,20 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import { GoSun } from "react-icons/go";
 import { FaMoon } from "react-icons/fa";
+import { auth } from "../Firebase/firebase.congig";
+import { signOut } from "firebase/auth";
 
 const Header = () => {
-  const {setdark, dark} = useContext(AuthContext)
+  const {setdark, dark, user} = useContext(AuthContext);
+  const singOut = ()=>{
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  }
   const handletheme = ()=>{
     setdark(!dark)
   }
@@ -98,45 +109,44 @@ const Header = () => {
           <ul className="menu menu-horizontal px-1 space-x-6">{links}</ul>
         </div>
         <div className="navbar-end">
-          {/* profile image */}
-          <div className="dropdown dropdown-end">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar"
-            >
-              <div className="w-10 rounded-full">
-                <img
-                  alt="Tailwind CSS Navbar component"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                />
+          {user ? (
+            // Profile Image Dropdown
+            <div className="dropdown dropdown-end space-x-3">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle avatar"
+              >
+                <div className="w-10 rounded-full">
+                  <img alt="User Profile" src={user?.photo} />
+                </div>
               </div>
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              >
+                <li>
+                  <a className="justify-between">{user?.name}</a>
+                </li>
+                <li>
+                  <button onClick={singOut}>Logout</button>
+                </li>
+              </ul>
             </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-            >
-              <li>
-                <a className="justify-between">
-                  Profile
-                  <span className="badge">New</span>
-                </a>
-              </li>
-              <li>
-                <a>Logout</a>
-              </li>
-            </ul>
-          </div>
-          {/* profile img end */}
-          {/* button start */}
-          <div className="join join-vertical lg:join-horizontal">
-            <Link to={`/auth/login`} className="btn join-item">LogIn</Link>
-            <Link to={`/auth/regester`} className="btn join-item">SignUp</Link>
-          </div>
-          {/* button end */}
+          ) : (
+            // LogIn and SignUp Buttons
+            <div className="join join-vertical lg:join-horizontal">
+              <Link to={`/auth/login`} className="btn join-item">
+                LogIn
+              </Link>
+              <Link to={`/auth/register`} className="btn join-item">
+                SignUp
+              </Link>
+            </div>
+          )}
 
           {/* theme controlat start */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 space-x-3">
             <button onClick={handletheme}>
               {dark ? (
                 <GoSun className="text-yellow-400 text-2xl" />

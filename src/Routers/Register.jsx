@@ -4,7 +4,7 @@ import { AuthContext } from "../provider/AuthProvider";
 import { toast } from "react-toastify";
 
 const Register = () => {
-  const { crateMailPassword, user, setUser, loadding, setLoadding } =
+  const { crateMailPassword, user, setUser, loadding, setLoadding, dark } =
     useContext(AuthContext);
   const [formData, setFormData] = useState({
     name: "",
@@ -82,7 +82,7 @@ const Register = () => {
             setTimeout(() => {
               setLoadding(false);
             }, 2000);
-            
+
             
           });
       })
@@ -97,9 +97,17 @@ const Register = () => {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center min-h-screen bg-gray-100">
-        <div className="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
-          <h2 className="text-center text-xl font-bold text-gray-800 mb-6">
+      <div className="flex flex-col justify-center items-center min-h-screen">
+        <div
+          className={`${
+            dark ? "border border-yellow-300" : "bg-white"
+          } p-8 rounded-lg shadow-md max-w-md w-full`}
+        >
+          <h2
+            className={`text-center text-xl font-bold mb-6 ${
+              dark ? "text-gray-200" : "text-gray-800"
+            }`}
+          >
             Register
           </h2>
           <form onSubmit={handleSubmit}>
