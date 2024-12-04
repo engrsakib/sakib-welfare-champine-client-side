@@ -1,15 +1,18 @@
 import React, { useContext, useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
+import Swal from "sweetalert2";
+import Google from "../components/Google";
 
 const LogIn = () => {
-  const { dark, logInMail, setUser } = useContext(AuthContext);
+  const { dark, logInMail, setUser, user} = useContext(AuthContext);
   const [formData, setFormData] = useState({
     mail: "",
     password: "",
     remember: false,
   });
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
@@ -27,12 +30,20 @@ const LogIn = () => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        setUser(user)
+        setUser(user);
+        Swal.fire(`successfully LogInd!`);
+        navigate('/');
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Mail or password is wrong!",
+        });
+
       });
   };
 
@@ -121,6 +132,8 @@ const LogIn = () => {
               </Link>
             </p>
           </div>
+          
+            <Google></Google>
         </div>
       </div>
     </>

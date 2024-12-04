@@ -2,10 +2,14 @@ import React, { useContext, useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { AuthContext } from "../provider/AuthProvider";
 import { toast } from "react-toastify";
+import Google from "../components/Google";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const { crateMailPassword, user, setUser, loadding, setLoadding, dark } =
     useContext(AuthContext);
+    const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -78,11 +82,12 @@ const Register = () => {
           .then((data) => {
             // console.log(newUser);
             setUser(newUser);
+            Swal.fire("User create successfullya and LogIn!");
             setLoadding(true);
             setTimeout(() => {
               setLoadding(false);
             }, 2000);
-
+            navigate('/');
             
           });
       })
@@ -189,6 +194,7 @@ const Register = () => {
               Register
             </button>
           </form>
+          <Google></Google>
         </div>
       </div>
     </>
