@@ -7,6 +7,7 @@ import AllCamign from "../pages/AllCamign";
 import AddCap from "../pages/AddCap";
 import MyCamo from "../pages/MyCamo";
 import MyDonation from "../pages/MyDonation";
+import Privete from "./Privete";
 
 const router = createBrowserRouter([
   {
@@ -31,15 +32,27 @@ const router = createBrowserRouter([
       },
       {
         path: "/donation/add-campagion",
-        element: <AddCap></AddCap>,
+        element: (
+          <Privete>
+            <AddCap></AddCap>
+          </Privete>
+        ),
       },
       {
         path: "/donation/my-donation",
-        element: <MyDonation></MyDonation>,
+        element: (
+          <Privete>
+            <MyDonation></MyDonation>
+          </Privete>
+        ),
       },
       {
         path: "/donation/my-campagion",
-        element: <MyCamo></MyCamo>,
+        element: (
+          <Privete>
+            <MyCamo></MyCamo>
+          </Privete>
+        ),
       },
     ],
   },

@@ -27,14 +27,16 @@ const AuthProvider = ({ children }) => {
 
   // user setup
   const [user, setUser] = useState(null);
-  const [loadding, setLoadding] = useState();
+  const [loadding, setLoadding] = useState(true);
   console.log(user?.email);
 
   // observerd
   useEffect(() => {
     const subscribe = onAuthStateChanged(auth, (Currentuser) => {
       setUser(Currentuser);
-
+      setTimeout(() => {
+        setLoadding(false);
+      }, 200);
       if (Currentuser?.email) {
         fetch(`http://localhost:5000/users/${Currentuser?.email}`)
           .then((res) => res.json())
