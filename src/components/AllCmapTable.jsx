@@ -1,8 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const AllCmapTable = ({ d }) => {
     const { _id, name, deadline, title, photoURL, description } = d;
-    console.log(d)
+    const handleDetails = (id)=>{
+        console.log(id)
+    }
   return (
     <>
       <tr>
@@ -22,7 +25,9 @@ const AllCmapTable = ({ d }) => {
         <td className="w-[50%] text-justify">{description}</td>
         <td>{deadline}</td>
         <th>
-          <button className="btn btn-ghost btn-xs">details</button>
+          <Link to={`/donation/all-campagion/details/${_id}`} className="btn btn-ghost btn-xs">
+            details
+          </Link>
         </th>
       </tr>
     </>

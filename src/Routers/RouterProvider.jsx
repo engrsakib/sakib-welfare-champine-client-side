@@ -8,6 +8,7 @@ import AddCap from "../pages/AddCap";
 import MyCamo from "../pages/MyCamo";
 import MyDonation from "../pages/MyDonation";
 import Privete from "./Privete";
+import Details from "../pages/Details";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,11 @@ const router = createBrowserRouter([
         path: "/donation/all-campagion",
         element: <AllCamign></AllCamign>,
         loader: () => fetch("http://localhost:5000/donations"),
+      },
+      {
+        path: "/donation/all-campagion/details/:id",
+        element: <Details></Details>,
+        loader: ({params}) => fetch(`http://localhost:5000/donations/${params.id}`),
       },
       {
         path: "/donation/add-campagion",
