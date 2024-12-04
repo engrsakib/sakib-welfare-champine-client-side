@@ -1,12 +1,14 @@
 import React, { useContext, useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import Swal from "sweetalert2";
 import Google from "../components/Google";
 
 const LogIn = () => {
   const { dark, logInMail, setUser, user} = useContext(AuthContext);
+  const location = useLocation();
+  // console.log(location.state)
   const [formData, setFormData] = useState({
     mail: "",
     password: "",
@@ -25,14 +27,14 @@ const LogIn = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form Data:", formData);
+    // console.log("Form Data:", formData);
     logInMail(formData.mail, formData.password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
         setUser(user);
         Swal.fire(`successfully LogInd!`);
-        navigate('/');
+        navigate(location.state ? location.state : '/');
         // ...
       })
       .catch((error) => {

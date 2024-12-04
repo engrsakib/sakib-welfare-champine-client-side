@@ -12,17 +12,19 @@ export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
   //theme control
-  const [dark, setdark] = useState(false);
+  // Initialize dark mode state with data from localStorage
+  const [dark, setdark] = useState(() => {
+    const savedTheme = localStorage.getItem("darkMode");
+    return savedTheme ? JSON.parse(savedTheme) : true;
+  });
+
+  // Update the theme whenever `dark` changes
   useEffect(() => {
-    if (dark) {
-      document
-        .getElementsByTagName("html")[0]
-        .setAttribute("data-theme", "night");
-    } else {
-      document
-        .getElementsByTagName("html")[0]
-        .setAttribute("data-theme", "light");
-    }
+    const theme = dark ? "night" : "light";
+    document.getElementsByTagName("html")[0].setAttribute("data-theme", theme);
+
+    // Save the preference to localStorage
+    localStorage.setItem("darkMode", JSON.stringify(dark));
   }, [dark]);
 
   // user setup
@@ -49,7 +51,7 @@ const AuthProvider = ({ children }) => {
     };
   }, []);
 
-  console.log(user);
+  // console.log(user);
   // loading
   if (loadding) {
     return <Loading></Loading>;

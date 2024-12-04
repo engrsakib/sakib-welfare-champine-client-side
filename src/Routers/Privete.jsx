@@ -1,23 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../provider/AuthProvider';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 
-const Privete = ({childeren}) => {
-    const { user, setLoadding, Loadding} = useContext(AuthContext);
-    
-    if(Loadding){
-        return;
-    }
-   
-    
-    
-    if(user && user?.mail){
-        return childeren;
-    }
+const Privete = ({ children }) => {
+  const { user, setLoadding, Loadding } = useContext(AuthContext);
+  const location = useLocation();
+  if (Loadding) {
+    return;
+  }
 
-    return (
-         <Navigate to={`/auth/login`}></Navigate>
-    );
+  if (user && user?.mail) {
+    return children;
+  }
+
+  return <Navigate state={location.pathname} to={`/auth/login`}></Navigate>;
 };
 
 export default Privete;
