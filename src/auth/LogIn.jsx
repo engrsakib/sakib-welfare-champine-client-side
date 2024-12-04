@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 
 const LogIn = () => {
-  const{dark} = useContext(AuthContext);
+  const { dark, logInMail, setUser } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     mail: "",
     password: "",
@@ -23,6 +23,17 @@ const LogIn = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form Data:", formData);
+    logInMail(formData.mail, formData.password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        setUser(user)
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
   };
 
   return (

@@ -3,6 +3,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "../Firebase/firebase.congig";
 import Loading from "../components/Loading";
@@ -34,21 +35,19 @@ const AuthProvider = ({ children }) => {
     const subscribe = onAuthStateChanged(auth, (Currentuser) => {
       setUser(Currentuser);
 
-      if(Currentuser?.email){
+      if (Currentuser?.email) {
         fetch(`http://localhost:5000/users/${Currentuser?.email}`)
           .then((res) => res.json())
           .then((data) => setUser(data[0]));
       }
     });
-    
+
     return () => {
       subscribe();
     };
   }, []);
 
-  
-
-  console.log(user)
+  console.log(user);
   // loading
   if (loadding) {
     return <Loading></Loading>;
@@ -58,11 +57,17 @@ const AuthProvider = ({ children }) => {
   const crateMailPassword = (mail, password) => {
     return createUserWithEmailAndPassword(auth, mail, password);
   };
+
+  // logIn mail and password
+  const logInMail = (mail, password) => {
+    return signInWithEmailAndPassword(auth, mail, password);
+  };
   const authInfo = {
     setdark,
     dark,
     setUser,
     user,
+    logInMail,
     crateMailPassword,
     loadding,
     setLoadding,
