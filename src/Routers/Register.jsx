@@ -4,7 +4,8 @@ import { AuthContext } from "../provider/AuthProvider";
 import { toast } from "react-toastify";
 
 const Register = () => {
-  const { crateMailPassword } = useContext(AuthContext);
+  const { crateMailPassword, user, setUser, loadding, setLoadding } =
+    useContext(AuthContext);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -44,15 +45,15 @@ const Register = () => {
     }
 
     setPasswordError("");
-    console.log("Form Submitted:", formData);
-    const mail = formData.email;
+    // console.log("Form Submitted:", formData);
+    const mail = formData.email.toLowerCase();
     const password = formData.password;
 
     crateMailPassword(mail, password)
       .then((userCredential) => {
         // Signed up
         const user = userCredential.user;
-        console.log(user);
+        // console.log(user);
 
         // save info to the dataBase
         const name = formData.name;
@@ -75,7 +76,14 @@ const Register = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
+            // console.log(newUser);
+            setUser(newUser);
+            setLoadding(true);
+            setTimeout(() => {
+              setLoadding(false);
+            }, 2000);
+            
+            
           });
       })
       .catch((error) => {

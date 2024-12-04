@@ -1,6 +1,11 @@
 import React, { createContext, useEffect, useState } from "react";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
 import { auth } from "../Firebase/firebase.congig";
+import Loading from "../components/Loading";
 
 export const AuthContext = createContext(null);
 
@@ -21,11 +26,37 @@ const AuthProvider = ({ children }) => {
 
   // user setup
   const [user, setUser] = useState(null);
-  const [loadding, setLoadding] = useState(true);
+  const [loadding, setLoadding] = useState();
+  console.log(user?.email);
+
+  // observerd
+  useEffect(() => {
+    const subscribe = onAuthStateChanged(auth, (Currentuser) => {
+      setUser(Currentuser);
+
+      if(Currentuser?.email){
+        fetch(`http://localhost:5000/users/${Currentuser?.email}`)
+          .then((res) => res.json())
+          .then((data) => setUser(data));
+      }
+    });
+    
+    return () => {
+      subscribe();
+    };
+  }, []);
+
+  
+
+  console.log(user)
+  // loading
+  if (loadding) {
+    return <Loading></Loading>;
+  }
 
   //Register by email and password
   const crateMailPassword = (mail, password) => {
-    return  createUserWithEmailAndPassword(auth, mail, password);
+    return createUserWithEmailAndPassword(auth, mail, password);
   };
   const authInfo = {
     setdark,
