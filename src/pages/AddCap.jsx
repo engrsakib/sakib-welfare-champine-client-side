@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
-
+import Swal from "sweetalert2";
 const AddCap = () => {
     const {user} = useContext(AuthContext)
   const [formData, setFormData] = useState({
@@ -24,7 +24,7 @@ const AddCap = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:5000/addcap", {
+      const response = await fetch("http://localhost:5000/donations", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -32,11 +32,17 @@ const AddCap = () => {
 
       if (response.ok) {
         const result = await response.json();
-        alert("Data submitted successfully!");
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Your work has been saved",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         console.log("Server Response:", result);
         setFormData({
-          name: "Md. Nazmus Sakib",
-          mail: "eng@gmail.com",
+          name: user.name,
+          mail: user.mail,
           title: "",
           photoURL: "",
           type: "",
@@ -45,16 +51,26 @@ const AddCap = () => {
           deadline: "",
         });
       } else {
-        console.error("Failed to submit data.");
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        //   footer: '<a href="#">Why do I have this issue?</a>',
+        });
       }
     } catch (error) {
-      console.error("Error submitting data:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+        // footer: '<a href="#">Why do I have this issue?</a>',
+      });
     }
   };
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-base-200 rounded-lg shadow-lg">
-      <h2 className="text-2xl font-bold text-center mb-6">Add Cap</h2>
+      <h2 className="text-2xl font-bold text-center mb-6">Add Campagion</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Name */}
         <div>
