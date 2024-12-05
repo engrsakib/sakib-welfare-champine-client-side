@@ -37,6 +37,7 @@ const MyCamo = () => {
       >
         My campagion
       </h1>
+      <div className="overflow-x-auto">
       <table className="table">
         <thead>
           <tr>
@@ -64,6 +65,7 @@ const MyCamo = () => {
           />
         )}
       </table>
+      </div>
     </div>
   );
 };

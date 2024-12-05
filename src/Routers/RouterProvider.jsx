@@ -11,6 +11,7 @@ import Privete from "./Privete";
 import Details from "../pages/Details";
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
+import Update from "../components/Update";
 
 
 
@@ -35,6 +36,16 @@ const router = createBrowserRouter([
         path: "/donation/all-campagion",
         element: <AllCamign></AllCamign>,
         loader: () => fetch("http://localhost:5000/donations"),
+      },
+      {
+        path: "/donation/update/:id",
+        element: (
+          <Privete>
+            <Update></Update>
+          </Privete>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/donationsUpadte/${params.id}`),
       },
       {
         path: "/donation/all-campagion/details/:id",

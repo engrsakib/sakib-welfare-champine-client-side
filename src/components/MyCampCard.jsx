@@ -51,7 +51,7 @@ const MyCampCard = ({ d, setDonations }) => {
                  );
                 swalWithBootstrapButtons.fire({
                   title: "Deleted!",
-                  text: "Your file has been deleted.",
+                  text: "Your campagion has been deleted.",
                   icon: "success",
                 });
               }
@@ -62,7 +62,7 @@ const MyCampCard = ({ d, setDonations }) => {
         ) {
           swalWithBootstrapButtons.fire({
             title: "Cancelled",
-            text: "Your imaginary file is safe :)",
+            text: "Your CAMPAGION is safe",
             icon: "error",
           });
         }
@@ -99,9 +99,9 @@ const MyCampCard = ({ d, setDonations }) => {
           >
             details
           </Link>
-          <button className="btn btn-ghost btn-xs">
+          <Link to={`/donation/update/${_id}`} className="btn btn-ghost btn-xs">
             <MdModeEditOutline />
-          </button>
+          </Link>
           <button
             onClick={() => handleDelete(_id)}
             className="btn btn-ghost btn-xs"
