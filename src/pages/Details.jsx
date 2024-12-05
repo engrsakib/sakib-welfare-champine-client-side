@@ -3,9 +3,9 @@ import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 
 const Details = () => {
-  const { dark } = useContext(AuthContext);
+  const { dark, setActive, active } = useContext(AuthContext);
   const data = useLoaderData();
-  const [active, setActive] = useState(true);
+  
   // console.log(data[0])
   const {
     _id,

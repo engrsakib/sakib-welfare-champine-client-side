@@ -18,6 +18,9 @@ const AuthProvider = ({ children }) => {
     return savedTheme ? JSON.parse(savedTheme) : true;
   });
 
+  // active donation
+  const [active, setActive] = useState(true);
+
   // Update the theme whenever `dark` changes
   useEffect(() => {
     const theme = dark ? "night" : "light";
@@ -66,6 +69,7 @@ const AuthProvider = ({ children }) => {
   const logInMail = (mail, password) => {
     return signInWithEmailAndPassword(auth, mail, password);
   };
+
   const authInfo = {
     setdark,
     dark,
@@ -75,6 +79,8 @@ const AuthProvider = ({ children }) => {
     crateMailPassword,
     loadding,
     setLoadding,
+    setActive,
+    active
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
