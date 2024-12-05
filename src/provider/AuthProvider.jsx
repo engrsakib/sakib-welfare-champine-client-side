@@ -33,7 +33,7 @@ const AuthProvider = ({ children }) => {
   // user setup
   const [user, setUser] = useState(null);
   const [loadding, setLoadding] = useState(true);
-  console.log(user?.email);
+  // console.log(user?.email);
 
   // observerd
   useEffect(() => {

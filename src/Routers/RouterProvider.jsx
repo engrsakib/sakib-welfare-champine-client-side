@@ -9,6 +9,10 @@ import MyCamo from "../pages/MyCamo";
 import MyDonation from "../pages/MyDonation";
 import Privete from "./Privete";
 import Details from "../pages/Details";
+import { useContext } from "react";
+import { AuthContext } from "../provider/AuthProvider";
+
+
 
 const router = createBrowserRouter([
   {

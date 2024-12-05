@@ -14,7 +14,7 @@ const AllCamign = () => {
           dark ? "text-gray-200" : "text-gray-800"
         }`}
       >
-        all campign
+        All campagion
       </h1>
       <div className="overflow-x-auto">
         <table className="table">
