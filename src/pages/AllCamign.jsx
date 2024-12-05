@@ -21,6 +21,7 @@ const AllCamign = () => {
           <thead>
             <tr>
               <th>Title and photo</th>
+              <th>TK</th>
               <th>Types</th>
               <th></th>
               <th>Deadline</th>

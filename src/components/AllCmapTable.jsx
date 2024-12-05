@@ -4,7 +4,7 @@ import { AuthContext } from "../provider/AuthProvider";
 
 const AllCmapTable = ({ d }) => {
   const {dark, active} = useContext(AuthContext);
-    const { _id, name, deadline, title, photoURL, description, type } = d;
+    const { _id, name, deadline, title, photoURL, minimumMoney, type } = d;
    
   return (
     <>
@@ -24,6 +24,7 @@ const AllCmapTable = ({ d }) => {
             </div>
           </div>
         </td>
+        <td className="text-justify">{minimumMoney}</td>
         <td className="text-justify">{type}</td>
         <td></td>
         <div className="max-sm:w-[120px]">

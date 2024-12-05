@@ -37,22 +37,25 @@ const MyCamo = () => {
       >
         My campagion
       </h1>
-       <table className="table">
-          <thead>
-            <tr>
-              <th>Title and photo</th>
-              <th>Types</th>
-              <th></th>
-              <th>Deadline</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
+      <table className="table">
+        <thead>
+          <tr>
+            <th>Title and photo</th>
+            <th>TK</th>
+            <th>Types</th>
+            <th></th>
+            <th>Deadline</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
         {donation ? (
           donation.map((d, index) => (
-            <MyCampCard key={index} d={d}>
-              
-            </MyCampCard>
+            <MyCampCard
+              key={index}
+              d={d}
+              setDonations={setDonations}
+            ></MyCampCard>
           ))
         ) : (
           <img
