@@ -4,7 +4,7 @@ import { AuthContext } from "../provider/AuthProvider";
 
 const AllCmapTable = ({ d }) => {
   const {dark, active} = useContext(AuthContext);
-    const { _id, name, deadline, title, photoURL, moneyNedd, type } = d;
+    const { _id, name, deadline, minimumMoney, title, photoURL, moneyNedd, type } = d;
    
   return (
     <>
@@ -18,13 +18,14 @@ const AllCmapTable = ({ d }) => {
                 <img src={photoURL} alt="Avatar Tailwind CSS Component" />
               </div>
             </div>
-            <div className="max-sm:w-[250px]">
+            <div className="w-[250px] md:w-[300px]">
               <div className="font-bold">{title}</div>
               <div className="text-sm opacity-50">Author: {name}</div>
             </div>
           </div>
         </td>
         <td className="text-justify">{moneyNedd}</td>
+        <td className="text-justify">{minimumMoney}</td>
         <td className="text-justify">{type}</td>
         <td></td>
         <div className="max-sm:w-[120px]">

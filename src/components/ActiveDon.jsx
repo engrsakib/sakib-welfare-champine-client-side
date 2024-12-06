@@ -42,7 +42,7 @@ const ActiveDon = () => {
         </p>
       </div>
 
-      <section className='grid lg:grid-cols-3 gap-4 md:grid-cols-2 grid-1 gap-cols-4'>
+      <section className='grid mt-3 lg:grid-cols-3 gap-4 md:grid-cols-2 grid-1 gap-cols-4'>
        {
         donation.map(fund => <ActiveCard key={fund._id} fund={fund}></ActiveCard>)
        }

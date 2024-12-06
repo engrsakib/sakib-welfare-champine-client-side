@@ -10,7 +10,7 @@ const AddCap = () => {
     photoURL: "",
     type: "",
     description: "",
-    moneyNedd:"",
+    moneyNedd: "",
     minimumMoney: "",
     deadline: "",
   });
@@ -25,10 +25,17 @@ const AddCap = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      // Parse minimumMoney and moneyNedd to numbers
+      const payload = {
+        ...formData,
+        minimumMoney: parseFloat(formData.minimumMoney),
+        moneyNedd: parseFloat(formData.moneyNedd),
+      };
+
       const response = await fetch("http://localhost:5000/donations", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
 
       if (response.ok) {
@@ -36,7 +43,7 @@ const AddCap = () => {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Your work has been saved",
+          title: "Your campaign has been saved",
           showConfirmButton: false,
           timer: 1500,
         });
@@ -57,7 +64,6 @@ const AddCap = () => {
           icon: "error",
           title: "Oops...",
           text: "Something went wrong!",
-        //   footer: '<a href="#">Why do I have this issue?</a>',
         });
       }
     } catch (error) {
@@ -65,10 +71,10 @@ const AddCap = () => {
         icon: "error",
         title: "Oops...",
         text: "Something went wrong!",
-        // footer: '<a href="#">Why do I have this issue?</a>',
       });
     }
   };
+
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-base-200 rounded-lg shadow-lg">
