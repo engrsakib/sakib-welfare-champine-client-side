@@ -10,6 +10,7 @@ const AddCap = () => {
     photoURL: "",
     type: "",
     description: "",
+    moneyNedd:"",
     minimumMoney: "",
     deadline: "",
   });
@@ -47,6 +48,7 @@ const AddCap = () => {
           photoURL: "",
           type: "",
           description: "",
+          moneyNedd: "",
           minimumMoney: "",
           deadline: "",
         });
@@ -153,6 +155,20 @@ const AddCap = () => {
             onChange={handleChange}
             placeholder="Enter a description"
             className="textarea textarea-bordered w-full"
+            required
+          />
+        </div>
+
+        {/* Money Needed */}
+        <div>
+          <label className="label">Money Neaded</label>
+          <input
+            type="number"
+            name="moneyNedd"
+            value={formData.moneyNedd}
+            onChange={handleChange}
+            placeholder="Enter the money required"
+            className="input input-bordered w-full"
             required
           />
         </div>

@@ -86,7 +86,7 @@ const Register = () => {
             setLoadding(true);
             setTimeout(() => {
               setLoadding(false);
-            }, 2000);
+            }, 1000);
             navigate('/');
             
           });

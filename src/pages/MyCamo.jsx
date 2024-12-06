@@ -4,13 +4,13 @@ import MyCampCard from "../components/MyCampCard";
 import AllCmapTable from "../components/AllCmapTable";
 
 const MyCamo = () => {
-  const { user, dark } = useContext(AuthContext); 
-  const [donation, setDonations] = useState(null); 
-  const [loadding, setLoadding] = useState(true); 
+  const { user, dark } = useContext(AuthContext);
+  const [donation, setDonations] = useState(null);
+  const [loadding, setLoadding] = useState(true);
 
   useEffect(() => {
     if (user?.mail) {
-      setLoadding(true); 
+      setLoadding(true);
       fetch(`http://localhost:5000/myDonations/${user.mail}`)
         .then((res) => res.json())
         .then((data) => {
@@ -25,7 +25,7 @@ const MyCamo = () => {
   }, [user?.mail]); // Use optional chaining to avoid errors if `user` is undefined
 
   if (loadding) {
-    return ;
+    return;
   }
 
   return (
@@ -38,33 +38,26 @@ const MyCamo = () => {
         My campagion
       </h1>
       <div className="overflow-x-auto">
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Title and photo</th>
-            <th>TK</th>
-            <th>Types</th>
-            <th></th>
-            <th>Deadline</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        {donation ? (
-          donation.map((d, index) => (
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Title and photo</th>
+              <th>TK</th>
+              <th>Types</th>
+              <th></th>
+              <th>Deadline</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          {donation.map((d, index) => (
             <MyCampCard
               key={index}
               d={d}
               setDonations={setDonations}
             ></MyCampCard>
-          ))
-        ) : (
-          <img
-            src="https://i.ibb.co.com/qy2nCsR/empty-donation-box-glass-plastic-ballot-container-free-vector.jpg"
-            alt=""
-          />
-        )}
-      </table>
+          ))}
+        </table>
       </div>
     </div>
   );

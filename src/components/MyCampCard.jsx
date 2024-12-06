@@ -15,7 +15,7 @@ const MyCampCard = ({ d, setDonations }) => {
     photoURL,
     type,
     description,
-    minimumMoney,
+    moneyNedd,
     deadline,
   } = d;
 
@@ -86,7 +86,7 @@ const MyCampCard = ({ d, setDonations }) => {
             </div>
           </div>
         </td>
-        <td className="text-justify">{minimumMoney}</td>
+        <td className="text-justify">{moneyNedd}</td>
         <td className="text-justify">{type}</td>
         <td></td>
         <div className="max-sm:w-[120px]">

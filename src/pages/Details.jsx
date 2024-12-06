@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const Details = () => {
   const { dark, setActive, active } = useContext(AuthContext);
@@ -15,7 +16,7 @@ const Details = () => {
     photoURL,
     type,
     description,
-    minimumMoney,
+    moneyNedd,
     deadline,
   } = data[0];
 
@@ -50,7 +51,18 @@ const Details = () => {
     const interval = setInterval(calculateTimeLeft, 1000);
 
     return () => clearInterval(interval); // Cleanup interval on component unmount
-  }, []);
+  }, [deadline, setActive]);
+  const handleDonate = ()=>{
+    if(active){
+      return;
+    }else{
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Donations date!",
+      });
+    }
+  }
   return (
     <>
       <div className="flex flex-col lg:flex-row gap-8 px-6 lg:px-16 py-8">
@@ -83,7 +95,7 @@ const Details = () => {
 
         {/* Right Section */}
         <div className="w-full lg:w-1/3 bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-2xl font-bold">{minimumMoney} TK needed</h2>
+          <h2 className="text-2xl font-bold">{moneyNedd} TK needed</h2>
           <p className="text-gray-600">
             Name: {name} <br /> Mail: {mail}
           </p>
@@ -102,7 +114,7 @@ const Details = () => {
               minutes, and {timeLeft.seconds} seconds
             </p>
           </button>
-          <button className="btn btn-primary w-full my-2">Donate Now</button>
+          <button onClick={()=>{handleDonate()}} className="btn btn-primary w-full my-2">Donate Now</button>
 
           <h3 className="mt-6 text-lg font-semibold">Recent Donations</h3>
           <ul className="mt-4 space-y-2">

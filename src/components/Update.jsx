@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 const Update = () => {
     const updateData = useLoaderData();
     // console.log(updateData)
-    const { _id, name, mail, deadline, minimumMoney, title, photoURL , type, description} = updateData;
+    const { _id, name, mail, deadline, moneyNedd, minimumMoney, title, photoURL , type, description} = updateData;
     const {user} = useContext(AuthContext)
   const [formData, setFormData] = useState({
     name: user.name, // Static data for demonstration
@@ -15,6 +15,7 @@ const Update = () => {
     photoURL: photoURL,
     type: type,
     description: description,
+    moneyNedd: moneyNedd,
     minimumMoney: minimumMoney,
     deadline: deadline,
   });
@@ -47,7 +48,7 @@ const Update = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        console.log("Server Response:", result);
+        // console.log("Server Response:", result);
         setFormData({
           name: user.name,
           mail: user.mail,
@@ -55,6 +56,7 @@ const Update = () => {
           photoURL: "",
           type: "",
           description: "",
+          moneyNedd: "",
           minimumMoney: "",
           deadline: "",
         });
@@ -161,6 +163,20 @@ const Update = () => {
                 onChange={handleChange}
                 placeholder="Enter a description"
                 className="textarea textarea-bordered w-full"
+                required
+              />
+            </div>
+
+            {/* Money Neaded */}
+            <div>
+              <label className="label">Money Neaded</label>
+              <input
+                type="number"
+                name="moneyNedd"
+                value={formData.moneyNedd}
+                onChange={handleChange}
+                placeholder="Enter the minimum money required"
+                className="input input-bordered w-full"
                 required
               />
             </div>
