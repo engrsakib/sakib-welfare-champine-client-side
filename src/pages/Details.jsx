@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import Swal from "sweetalert2";
 
 const Details = () => {
   const { dark, setActive, active } = useContext(AuthContext);
   const data = useLoaderData();
-  
+  const navigate = useNavigate();
   // console.log(data[0])
   const {
     _id,
@@ -17,6 +17,7 @@ const Details = () => {
     type,
     description,
     moneyNedd,
+    minimumMoney,
     deadline,
   } = data[0];
 
@@ -52,9 +53,16 @@ const Details = () => {
 
     return () => clearInterval(interval); // Cleanup interval on component unmount
   }, [deadline, setActive]);
-  const handleDonate = ()=>{
+
+
+  // donetation section handel
+  const handleDonate = (id)=>{
     if(active){
-      return;
+        
+      navigate(`/donation/all-campagion/details/donated/${id}`);
+
+        
+
     }else{
       Swal.fire({
         icon: "error",
@@ -71,7 +79,7 @@ const Details = () => {
           <img
             src={photoURL}
             alt="Fundraiser"
-            className="rounded-lg shadow-md"
+            className="rounded-lg shadow-md w-full h-[400px] object-cover"
           />
           <h1 className="text-3xl font-bold mt-4">{title}</h1>
           <p className="text-gray-600 mt-2">
@@ -114,22 +122,29 @@ const Details = () => {
               minutes, and {timeLeft.seconds} seconds
             </p>
           </button>
-          <button onClick={()=>{handleDonate()}} className="btn btn-primary w-full my-2">Donate Now</button>
+          <button
+            onClick={() => {
+              handleDonate(_id);
+            }}
+            className="btn btn-primary w-full my-2"
+          >
+            Donate Now
+          </button>
 
-          <h3 className="mt-6 text-lg font-semibold">Recent Donations</h3>
+          <h3 className="mt-6 text-lg font-semibold">Other Informations</h3>
           <ul className="mt-4 space-y-2">
             <li className="flex justify-between">
-              <p className="font-medium">Om Verma</p>
-              <p className="text-gray-500">$100</p>
+              <p className="font-medium">Minimum Donations Amount</p>
+              <p className="text-gray-500">{minimumMoney} TK</p>
             </li>
-            <li className="flex justify-between">
+            {/* <li className="flex justify-between">
               <p className="font-medium">Davinder Sapra</p>
               <p className="text-gray-500">$5,000</p>
             </li>
             <li className="flex justify-between">
               <p className="font-medium">Anonymous</p>
               <p className="text-gray-500">$500</p>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>
