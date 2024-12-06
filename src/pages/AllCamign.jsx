@@ -9,13 +9,9 @@ const AllCamign = () => {
   console.log(data);
   return (
     <div>
-      <h1
-        className={` text-2xl font-black ${
-          dark ? "text-gray-200" : "text-gray-800"
-        }`}
-      >
-        All campagion
-      </h1>
+      <div className="text-center">
+        <h2 className="text-4xl font-bold text-orange-500">All Campagion</h2>
+      </div>
       <div className="overflow-x-auto">
         <table className="table">
           <thead>

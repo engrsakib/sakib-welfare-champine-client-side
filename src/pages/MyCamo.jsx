@@ -22,7 +22,7 @@ const MyCamo = () => {
           setLoadding(false); // End loadding even on error
         });
     }
-  }, [user?.mail]); // Use optional chaining to avoid errors if `user` is undefined
+  }, [user?.mail]); 
 
   if (loadding) {
     return;
@@ -30,13 +30,9 @@ const MyCamo = () => {
 
   return (
     <div>
-      <h1
-        className={` text-2xl font-black ${
-          dark ? "text-gray-200" : "text-gray-800"
-        }`}
-      >
-        My campagion
-      </h1>
+      <div className="text-center">
+        <h2 className="text-4xl font-bold text-orange-500">My Campagion</h2>
+      </div>
       <div className="overflow-x-auto">
         <table className="table">
           <thead>

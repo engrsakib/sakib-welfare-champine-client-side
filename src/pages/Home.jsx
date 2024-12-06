@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Slider from '../components/Slider';
 import { Helmet } from 'react-helmet';
 import Types from '../components/Types';
+import Mission from '../components/Mission';
+import ActiveDon from '../components/ActiveDon';
+import { AuthContext } from '../provider/AuthProvider';
 
 const Home = () => {
+  const{user} = useContext(AuthContext)
     return (
       <>
         {/* slider section */}
@@ -13,6 +17,10 @@ const Home = () => {
         {/* type writer start*/}
         <section>
         <Types></Types>
+        {/* our mission */}
+        <Mission></Mission>
+        {/* active donations */}
+        <ActiveDon></ActiveDon>
         </section>
         {/* type writer end*/}
         <Helmet>

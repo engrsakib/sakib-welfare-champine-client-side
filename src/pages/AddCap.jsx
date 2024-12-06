@@ -72,7 +72,9 @@ const AddCap = () => {
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-base-200 rounded-lg shadow-lg">
-      <h2 className="text-2xl font-bold text-center mb-6">Add Campagion</h2>
+      <div className="text-center">
+        <h2 className="text-4xl font-bold text-orange-500">Add Campagion</h2>
+      </div>
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Name */}
         <div>
