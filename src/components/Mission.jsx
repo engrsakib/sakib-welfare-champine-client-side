@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
+import { Fade } from "react-awesome-reveal";
 
 const Mission = () => {
   const { dark } = useContext(AuthContext); // Use the theme context
@@ -37,16 +38,19 @@ const Mission = () => {
   return (
     <>
       <div className="py-16 bg-base-100">
-        <div className="text-center">
-          <h2 className="text-4xl font-bold text-orange-500">OUR MISSION</h2>
-          <p className="mt-4 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Our mission is to empower individuals, communities, and
-            organizations by providing innovative solutions, fostering growth,
-            and making a meaningful impact on the world. We are committed to
-            creating opportunities, driving positive change, and building a
-            future where everyone can thrive.
-          </p>
-        </div>
+        <Fade delay={1e3} cascade damping={1e-1}>
+          <div className="text-center">
+            <h2 className="text-4xl font-bold text-orange-500">OUR MISSION</h2>
+
+            <p className="mt-4 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+              Our mission is to empower individuals, communities, and
+              organizations by providing innovative solutions, fostering growth,
+              and making a meaningful impact on the world. We are committed to
+              creating opportunities, driving positive change, and building a
+              future where everyone can thrive.
+            </p>
+          </div>
+        </Fade>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-10">
           {missions.map((mission) => (

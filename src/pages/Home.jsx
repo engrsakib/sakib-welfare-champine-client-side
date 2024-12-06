@@ -5,6 +5,7 @@ import Types from '../components/Types';
 import Mission from '../components/Mission';
 import ActiveDon from '../components/ActiveDon';
 import { AuthContext } from '../provider/AuthProvider';
+import FAQ from '../components/FAQ';
 
 const Home = () => {
   const{user} = useContext(AuthContext)
@@ -21,6 +22,7 @@ const Home = () => {
         <Mission></Mission>
         {/* active donations */}
         <ActiveDon></ActiveDon>
+        <FAQ></FAQ>
         </section>
         {/* type writer end*/}
         <Helmet>
