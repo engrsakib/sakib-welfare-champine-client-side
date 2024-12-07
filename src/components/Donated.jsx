@@ -76,13 +76,12 @@ const Donated = () => {
           if (result.dismiss === Swal.DismissReason.timer) {
             Swal.fire({
               title: "Success!",
-              text: "Donations Success",
-              imageUrl:
-                "https://img.freepik.com/free-photo/light-bulb-with-drawing-graph_1232-2105.jpg?t=st=1733561936~exp=1733565536~hmac=873ea06faa427f4066a5923ddd86d0c85fd41cd850f3546a3af35a189965aa22&w=826",
-              imageWidth: 400,
-              imageHeight: 200,
-              imageAlt: "Custom image",
+              text: "Donations successfully received",
+              html: `<img src="https://img.freepik.com/free-photo/light-bulb-with-drawing-graph_1232-2105.jpg?t=st=1733561936~exp=1733565536~hmac=873ea06faa427f4066a5923ddd86d0c85fd41cd850f3546a3af35a189965aa22&w=826" 
+          alt="Custom image" style="width: 100%; height: auto;" />`,
+              showConfirmButton: true,
             });
+
           }
 
         });

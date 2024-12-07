@@ -1,12 +1,13 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MdModeEditOutline } from "react-icons/md";
 import { RiDeleteBin3Fill } from "react-icons/ri";
 import Swal from "sweetalert2";
 
 const MyCampCard = ({ d, setDonations }) => {
   const { dark } = useContext(AuthContext);
+  const navigate = useNavigate();
   const {
     _id,
     name,
@@ -46,9 +47,9 @@ const MyCampCard = ({ d, setDonations }) => {
             .then((res) => res.json())
             .then((data) => {
               if (data.deletedCount > 0) {
-                 setDonations((prevDonations) =>
-                   prevDonations.filter((donation) => donation._id !== id)
-                 );
+                setDonations((prevDonations) =>
+                  prevDonations.filter((donation) => donation._id !== id)
+                );
                 swalWithBootstrapButtons.fire({
                   title: "Deleted!",
                   text: "Your campagion has been deleted.",
@@ -67,6 +68,24 @@ const MyCampCard = ({ d, setDonations }) => {
           });
         }
       });
+  };
+
+  const handleEdit = (id) => {
+    
+     Swal.fire({
+       title: "Do you want to Change Your documnets?",
+       showDenyButton: true,
+       showCancelButton: false,
+       confirmButtonText: "Change",
+       denyButtonText: `Don't Change`,
+     }).then((result) => {
+       /* Read more about isConfirmed, isDenied below */
+       if (result.isConfirmed) {
+         navigate(`/donation/update/${id}`);
+       } else if (result.isDenied) {
+         Swal.fire("Documents Change is stoped", "", "info");
+       }
+     });
   };
   return (
     <>
@@ -99,9 +118,12 @@ const MyCampCard = ({ d, setDonations }) => {
           >
             details
           </Link>
-          <Link to={`/donation/update/${_id}`} className="btn btn-ghost btn-xs">
+          <button
+            onClick={() => handleEdit(_id)}
+            className="btn btn-ghost btn-xs"
+          >
             <MdModeEditOutline />
-          </Link>
+          </button>
           <button
             onClick={() => handleDelete(_id)}
             className="btn btn-ghost btn-xs"
