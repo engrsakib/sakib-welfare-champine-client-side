@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import Swal from "sweetalert2";
 
@@ -19,6 +19,7 @@ const Donated = () => {
     minimumMoney,
     deadline,
   } = data[0];
+  const navigete = useNavigate();
 //   console.log(data[0]);
 
   const handleSubmit = async (e) => {
@@ -53,23 +54,37 @@ const Donated = () => {
       });
 
       if (response.ok) {
-
+        navigete(`/donation/all-campagion/details/${_id}`);
+        let timerInterval;
         Swal.fire({
-          title: "Your Donation is Successfully added",
-          showClass: {
-            popup: `
-      animate__animated
-      animate__fadeInUp
-      animate__faster
-    `,
+          title: "Donated",
+          html: "Donation on processing",
+          timer: 2000,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading();
+            const timer = Swal.getPopup().querySelector("b");
+            timerInterval = setInterval(() => {
+              timer.textContent = `${Swal.getTimerLeft()}`;
+            }, 100);
           },
-          hideClass: {
-            popup: `
-      animate__animated
-      animate__fadeOutDown
-      animate__faster
-    `,
+          willClose: () => {
+            clearInterval(timerInterval);
           },
+        }).then((result) => {
+          /* Read more about handling dismissals below */
+          if (result.dismiss === Swal.DismissReason.timer) {
+            Swal.fire({
+              title: "Success!",
+              text: "Donations Success",
+              imageUrl:
+                "https://img.freepik.com/free-photo/light-bulb-with-drawing-graph_1232-2105.jpg?t=st=1733561936~exp=1733565536~hmac=873ea06faa427f4066a5923ddd86d0c85fd41cd850f3546a3af35a189965aa22&w=826",
+              imageWidth: 400,
+              imageHeight: 200,
+              imageAlt: "Custom image",
+            });
+          }
+
         });
         setDonationAmount(""); // Reset the form
       } else {
