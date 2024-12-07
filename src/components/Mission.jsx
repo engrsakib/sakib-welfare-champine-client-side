@@ -8,28 +8,28 @@ const Mission = () => {
   const missions = [
     {
       id: 1,
-      icon: "📚", // Replace with an actual icon/image
+      icon: "📚", 
       title: "Free Education",
       description:
         "We aim to provide free education to underprivileged children and ensure access to learning materials.",
     },
     {
       id: 2,
-      icon: "🍲", // Replace with an actual icon/image
+      icon: "🍲", 
       title: "Feed Poor Child",
       description:
         "Our mission is to end child hunger by providing nutritious meals to children in need.",
     },
     {
       id: 3,
-      icon: "💊", // Replace with an actual icon/image
+      icon: "💊", 
       title: "Free Medicines",
       description:
         "Providing essential medicines free of cost to those who cannot afford them.",
     },
     {
       id: 4,
-      icon: "🏠", // Replace with an actual icon/image
+      icon: "🏠", 
       title: "Give Shelter",
       description:
         "Helping the homeless find shelter and a place to call home.",
