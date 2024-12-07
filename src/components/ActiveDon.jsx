@@ -10,7 +10,7 @@ const ActiveDon = () => {
   const [loadding, setLoadding] = useState(true);
 
   useEffect(() => {
-    if (user?.mail) {
+    
       setLoadding(true);
       fetch(`http://localhost:5000/activeDonations`)
         .then((res) => res.json())
@@ -22,8 +22,8 @@ const ActiveDon = () => {
           console.error(err);
           setLoadding(false); // End loadding even on error
         });
-    }
-  }, [user?.mail]); 
+    
+  }, []); 
    if (loadding) {
      return;
    }

@@ -13,6 +13,8 @@ import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import Update from "../components/Update";
 import Donated from "../components/Donated";
+import Fourzero from "../components/Fourzero";
+import Public from "./Public";
 
 
 
@@ -20,6 +22,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App></App>,
+    errorElement: <Fourzero></Fourzero>,
     children: [
       {
         path: "/",
@@ -27,11 +30,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/auth/login",
-        element: <LogIn></LogIn>,
+        element: (
+          <Public>
+            <LogIn></LogIn>
+          </Public>
+        ),
       },
       {
         path: "/auth/register",
-        element: <Register></Register>,
+        element: (
+          <Public>
+            <Register></Register>
+          </Public>
+        ),
       },
       {
         path: "/donation/all-campagion",

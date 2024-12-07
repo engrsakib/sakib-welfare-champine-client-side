@@ -123,7 +123,10 @@ const Header = () => {
         <div className="navbar-end">
           {user ? (
             // Profile Image Dropdown
-            <div className="dropdown dropdown-end space-x-3">
+            <div
+              className="dropdown dropdown-end space-x-3 tooltip"
+              data-tip={user?.name}
+            >
               <div
                 tabIndex={0}
                 role="button"
