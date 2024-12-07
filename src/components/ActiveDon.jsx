@@ -1,33 +1,31 @@
-import React, { useContext, useEffect, useState } from 'react';
-import MyCampCard from './MyCampCard';
-import { AuthContext } from '../provider/AuthProvider';
-import MyFund from '../pages/MyFund';
-import ActiveCard from './ActiveCard';
+import React, { useContext, useEffect, useState } from "react";
+import MyCampCard from "./MyCampCard";
+import { AuthContext } from "../provider/AuthProvider";
+import MyFund from "../pages/MyFund";
+import ActiveCard from "./ActiveCard";
 
 const ActiveDon = () => {
-    const{user} = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [donation, setDonations] = useState(null);
   const [loadding, setLoadding] = useState(true);
 
   useEffect(() => {
-    
-      setLoadding(true);
-      fetch(`http://localhost:5000/activeDonations`)
-        .then((res) => res.json())
-        .then((data) => {
-          setDonations(data); // Update state with fetched data
-          setLoadding(false); // End loadding
-        })
-        .catch((err) => {
-          console.error(err);
-          setLoadding(false); // End loadding even on error
-        });
-    
-  }, []); 
-   if (loadding) {
-     return;
-   }
-//   console.log(donation)
+    setLoadding(true);
+    fetch(`https://sakib-welfare-champine-server.vercel.app/activeDonations`)
+      .then((res) => res.json())
+      .then((data) => {
+        setDonations(data); // Update state with fetched data
+        setLoadding(false); // End loadding
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoadding(false); // End loadding even on error
+      });
+  }, []);
+  if (loadding) {
+    return;
+  }
+  //   console.log(donation)
   return (
     <div>
       <div className="text-center">
@@ -42,10 +40,10 @@ const ActiveDon = () => {
         </p>
       </div>
 
-      <section className='grid mt-3 lg:grid-cols-3 gap-4 md:grid-cols-2 grid-1 gap-cols-4'>
-       {
-        donation.map(fund => <ActiveCard key={fund._id} fund={fund}></ActiveCard>)
-       }
+      <section className="grid mt-3 lg:grid-cols-3 gap-4 md:grid-cols-2 grid-1 gap-cols-4">
+        {donation.map((fund) => (
+          <ActiveCard key={fund._id} fund={fund}></ActiveCard>
+        ))}
       </section>
     </div>
   );

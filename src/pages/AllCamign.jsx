@@ -3,9 +3,9 @@ import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import AllCmapTable from "../components/AllCmapTable";
 import { Helmet } from "react-helmet";
+import Loading from "../components/Loading";
 
 const AllCamign = () => {
-  
   const { dark, user } = useContext(AuthContext);
 
   const [data, setData] = useState(null);
@@ -13,28 +13,11 @@ const AllCamign = () => {
     setData(d);
   }, 2000);
 
-
   const [loadding, setLoadding] = useState(true);
 
-
   useEffect(() => {
-    
-      setLoadding(true);
-      fetch(`http://localhost:5000/donations`)
-        .then((res) => res.json())
-        .then((data) => {
-          setData(data); // Update state with fetched data
-          setLoadding(false); // End loadding
-        })
-        .catch((err) => {
-          console.error(err);
-          setLoadding(false); // End loadding even on error
-        });
-    
-  }, []);
-
-  const handleSort = () =>{
-    fetch(`http://localhost:5000/donations/sorted`)
+    setLoadding(true);
+    fetch(`https://sakib-welfare-champine-server.vercel.app/donations`)
       .then((res) => res.json())
       .then((data) => {
         setData(data); // Update state with fetched data
@@ -44,10 +27,23 @@ const AllCamign = () => {
         console.error(err);
         setLoadding(false); // End loadding even on error
       });
-  }
+  }, []);
+
+  const handleSort = () => {
+    fetch(`https://sakib-welfare-champine-server.vercel.app/donations/sorted`)
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data); // Update state with fetched data
+        setLoadding(false); // End loadding
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoadding(false); // End loadding even on error
+      });
+  };
 
   if (loadding) {
-    return;
+    return <Loading></Loading>;
   }
   // console.log(data);
   return (

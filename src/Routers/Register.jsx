@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 const Register = () => {
   const { crateMailPassword, user, setUser, loadding, setLoadding, dark } =
     useContext(AuthContext);
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -71,7 +71,7 @@ const Register = () => {
           lastSignInDate: user?.metadata?.lastSignInTime,
         };
 
-        fetch("http://localhost:5000/users", {
+        fetch("https://sakib-welfare-champine-server.vercel.app/users", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -87,8 +87,7 @@ const Register = () => {
             setTimeout(() => {
               setLoadding(false);
             }, 1000);
-            navigate('/');
-            
+            navigate("/");
           });
       })
       .catch((error) => {

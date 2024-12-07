@@ -41,9 +41,12 @@ const MyCampCard = ({ d, setDonations }) => {
       .then((result) => {
         if (result.isConfirmed) {
           // delete data
-          fetch(`http://localhost:5000/myDonations/${id}`, {
-            method: "DELETE",
-          })
+          fetch(
+            `https://sakib-welfare-champine-server.vercel.app/myDonations/${id}`,
+            {
+              method: "DELETE",
+            }
+          )
             .then((res) => res.json())
             .then((data) => {
               if (data.deletedCount > 0) {
@@ -71,21 +74,20 @@ const MyCampCard = ({ d, setDonations }) => {
   };
 
   const handleEdit = (id) => {
-    
-     Swal.fire({
-       title: "Do you want to Change Your documnets?",
-       showDenyButton: true,
-       showCancelButton: false,
-       confirmButtonText: "Change",
-       denyButtonText: `Don't Change`,
-     }).then((result) => {
-       /* Read more about isConfirmed, isDenied below */
-       if (result.isConfirmed) {
-         navigate(`/donation/update/${id}`);
-       } else if (result.isDenied) {
-         Swal.fire("Documents Change is stoped", "", "info");
-       }
-     });
+    Swal.fire({
+      title: "Do you want to Change Your documnets?",
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: "Change",
+      denyButtonText: `Don't Change`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        navigate(`/donation/update/${id}`);
+      } else if (result.isDenied) {
+        Swal.fire("Documents Change is stoped", "", "info");
+      }
+    });
   };
   return (
     <>

@@ -20,7 +20,7 @@ const Donated = () => {
     deadline,
   } = data[0];
   const navigete = useNavigate();
-//   console.log(data[0]);
+  //   console.log(data[0]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,11 +47,14 @@ const Donated = () => {
 
     // Send data to backend
     try {
-      const response = await fetch("http://localhost:5000/myMoney", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(donationData),
-      });
+      const response = await fetch(
+        "https://sakib-welfare-champine-server.vercel.app/myMoney",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(donationData),
+        }
+      );
 
       if (response.ok) {
         navigete(`/donation/all-campagion/details/${_id}`);
@@ -81,9 +84,7 @@ const Donated = () => {
           alt="Custom image" style="width: 100%; height: auto;" />`,
               showConfirmButton: true,
             });
-
           }
-
         });
         setDonationAmount(""); // Reset the form
       } else {

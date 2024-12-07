@@ -16,8 +16,6 @@ import Donated from "../components/Donated";
 import Fourzero from "../components/Fourzero";
 import Public from "./Public";
 
-
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -56,7 +54,9 @@ const router = createBrowserRouter([
           </Privete>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/donationsUpadte/${params.id}`),
+          fetch(
+            `https://sakib-welfare-champine-server.vercel.app/donationsUpadte/${params.id}`
+          ),
       },
       {
         path: "/donation/all-campagion/details/:id",
@@ -66,7 +66,9 @@ const router = createBrowserRouter([
           </Privete>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/donations/${params.id}`),
+          fetch(
+            `https://sakib-welfare-champine-server.vercel.app/donations/${params.id}`
+          ),
       },
       {
         path: "/donation/all-campagion/details/donated/:id",
@@ -76,7 +78,9 @@ const router = createBrowserRouter([
           </Privete>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/donations/${params.id}`),
+          fetch(
+            `https://sakib-welfare-champine-server.vercel.app/donations/${params.id}`
+          ),
       },
       {
         path: "/donation/add-campagion",

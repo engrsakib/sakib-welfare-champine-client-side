@@ -31,7 +31,7 @@ const Google = () => {
           lastSignInDate: users?.metadata?.lastSignInTime,
         };
         if (user.mail != users.email) {
-          fetch("http://localhost:5000/users", {
+          fetch("https://sakib-welfare-champine-server.vercel.app/users", {
             method: "POST",
             headers: {
               "content-type": "application/json",

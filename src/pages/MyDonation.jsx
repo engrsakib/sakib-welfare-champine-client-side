@@ -1,49 +1,52 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../provider/AuthProvider';
-import MyFund from './MyFund';
-import { Helmet } from 'react-helmet';
+import React, { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../provider/AuthProvider";
+import MyFund from "./MyFund";
+import { Helmet } from "react-helmet";
+import Loading from "../components/Loading";
 
 const MyDonation = () => {
-    const { user, dark } = useContext(AuthContext);
-    const [donation, setDonations] = useState(null);
-    const [loadding, setLoadding] = useState(true);
+  const { user, dark } = useContext(AuthContext);
+  const [donation, setDonations] = useState(null);
+  const [loadding, setLoadding] = useState(true);
 
-    useEffect(() => {
-      if (user?.mail) {
-        setLoadding(true);
-        fetch(`http://localhost:5000/myMoney/${user.mail}`)
-          .then((res) => res.json())
-          .then((data) => {
-            setDonations(data); 
-            setLoadding(false); 
-          })
-          .catch((err) => {
-            console.error(err);
-            setLoadding(false); 
-          });
-      }
-    }, [user?.mail]); 
-    // console.log(donation)
-
-    if (loadding) {
-      return;
+  useEffect(() => {
+    if (user?.mail) {
+      setLoadding(true);
+      fetch(
+        `https://sakib-welfare-champine-server.vercel.app/myMoney/${user.mail}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          setDonations(data);
+          setLoadding(false);
+        })
+        .catch((err) => {
+          console.error(err);
+          setLoadding(false);
+        });
     }
-    return (
-      <div>
-        <div className="text-center">
-          <h2 className="text-4xl font-bold text-orange-500">My Donations</h2>
-        </div>
-        <section className="grid mt-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {donation.map((fund) => (
-            <MyFund key={fund._id} fund={fund}></MyFund>
-          ))}
-        </section>
-        <Helmet>
-          <meta charSet="utf-8" />
-          <title>My Donations</title>
-        </Helmet>
+  }, [user?.mail]);
+  // console.log(donation)
+
+  if (loadding) {
+    return <Loading></Loading>;
+  }
+  return (
+    <div>
+      <div className="text-center">
+        <h2 className="text-4xl font-bold text-orange-500">My Donations</h2>
       </div>
-    );
+      <section className="grid mt-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {donation.map((fund) => (
+          <MyFund key={fund._id} fund={fund}></MyFund>
+        ))}
+      </section>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>My Donations</title>
+      </Helmet>
+    </div>
+  );
 };
 
 export default MyDonation;

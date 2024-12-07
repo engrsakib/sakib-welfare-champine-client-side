@@ -3,6 +3,7 @@ import { AuthContext } from "../provider/AuthProvider";
 import MyCampCard from "../components/MyCampCard";
 import AllCmapTable from "../components/AllCmapTable";
 import { Helmet } from "react-helmet";
+import Loading from "../components/Loading";
 
 const MyCamo = () => {
   const { user, dark } = useContext(AuthContext);
@@ -12,7 +13,9 @@ const MyCamo = () => {
   useEffect(() => {
     if (user?.mail) {
       setLoadding(true);
-      fetch(`http://localhost:5000/myDonations/${user.mail}`)
+      fetch(
+        `https://sakib-welfare-champine-server.vercel.app/myDonations/${user.mail}`
+      )
         .then((res) => res.json())
         .then((data) => {
           setDonations(data); // Update state with fetched data
@@ -23,10 +26,10 @@ const MyCamo = () => {
           setLoadding(false); // End loadding even on error
         });
     }
-  }, [user?.mail]); 
+  }, [user?.mail]);
 
   if (loadding) {
-    return;
+    return <Loading></Loading>;
   }
 
   return (

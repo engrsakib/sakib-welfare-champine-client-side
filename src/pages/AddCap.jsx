@@ -3,7 +3,7 @@ import { AuthContext } from "../provider/AuthProvider";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
 const AddCap = () => {
-    const {user} = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     name: user.name, // Static data for demonstration
     mail: user.mail,
@@ -25,61 +25,59 @@ const AddCap = () => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-      // Parse minimumMoney and moneyNedd to numbers
-      const payload = {
-        ...formData,
-        minimumMoney: parseFloat(formData.minimumMoney),
-        moneyNedd: parseFloat(formData.moneyNedd),
-      };
 
-      Swal.fire({
-        title: "Do you want to save?",
-        showDenyButton: true,
-        showCancelButton: false,
-        confirmButtonText: "Save",
-        denyButtonText: `Don't save`,
-      }).then(async(result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-          
-          const response = await fetch("http://localhost:5000/donations", {
+    // Parse minimumMoney and moneyNedd to numbers
+    const payload = {
+      ...formData,
+      minimumMoney: parseFloat(formData.minimumMoney),
+      moneyNedd: parseFloat(formData.moneyNedd),
+    };
+
+    Swal.fire({
+      title: "Do you want to save?",
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: "Save",
+      denyButtonText: `Don't save`,
+    }).then(async (result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        const response = await fetch(
+          "https://sakib-welfare-champine-server.vercel.app/donations",
+          {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),
-          });
-
-          if (response.ok) {
-            const result = await response.json();
-            Swal.fire("Saved!", "", "success");
-            console.log("Server Response:", result);
-            setFormData({
-              name: user.name,
-              mail: user.mail,
-              title: "",
-              photoURL: "",
-              type: "",
-              description: "",
-              moneyNedd: "",
-              minimumMoney: "",
-              deadline: "",
-            });
-          } else {
-            Swal.fire({
-              icon: "error",
-              title: "Oops...",
-              text: "Something went wrong!",
-            });
           }
+        );
 
-        } else if (result.isDenied) {
-          Swal.fire("Data are not saved", "", "info");
+        if (response.ok) {
+          const result = await response.json();
+          Swal.fire("Saved!", "", "success");
+          console.log("Server Response:", result);
+          setFormData({
+            name: user.name,
+            mail: user.mail,
+            title: "",
+            photoURL: "",
+            type: "",
+            description: "",
+            moneyNedd: "",
+            minimumMoney: "",
+            deadline: "",
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!",
+          });
         }
-      });
-    
-    
+      } else if (result.isDenied) {
+        Swal.fire("Data are not saved", "", "info");
+      }
+    });
   };
-
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-base-200 rounded-lg shadow-lg">

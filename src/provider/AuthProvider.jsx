@@ -43,7 +43,9 @@ const AuthProvider = ({ children }) => {
         setLoadding(false);
       }, 200);
       if (Currentuser?.email) {
-        fetch(`http://localhost:5000/users/${Currentuser?.email}`)
+        fetch(
+          `https://sakib-welfare-champine-server.vercel.app/users/${Currentuser?.email}`
+        )
           .then((res) => res.json())
           .then((data) => setUser(data[0]));
       }
@@ -80,7 +82,7 @@ const AuthProvider = ({ children }) => {
     loadding,
     setLoadding,
     setActive,
-    active
+    active,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

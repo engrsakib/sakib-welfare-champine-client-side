@@ -52,7 +52,7 @@ const Update = () => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         const response = await fetch(
-          `http://localhost:5000/donationsUpadte/${_id}`,
+          `https://sakib-welfare-champine-server.vercel.app/donationsUpadte/${_id}`,
           {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
