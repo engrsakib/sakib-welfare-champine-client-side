@@ -100,7 +100,9 @@ const MyCampCard = ({ d, setDonations }) => {
               </div>
             </div>
             <div className="max-sm:w-[250px]">
-              <div className="font-bold">{title}</div>
+              <div className="font-bold">
+                {title.length > 50 ? `${title.substring(0, 20)}...` : title}
+              </div>
               <div className="text-sm opacity-50">Author: {name}</div>
             </div>
           </div>

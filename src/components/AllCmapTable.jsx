@@ -9,7 +9,7 @@ const AllCmapTable = ({ d }) => {
   return (
     <>
       <tr
-        className={`${dark ? "border-gray-500" : "border-gray-200"} border-b `}
+        className={`${dark ? "border-gray-500" : "border-gray-200"} border-b place-items-center`}
       >
         <td>
           <div className="flex items-center gap-3">
@@ -19,7 +19,9 @@ const AllCmapTable = ({ d }) => {
               </div>
             </div>
             <div className="w-[250px] md:w-[300px]">
-              <div className="font-bold">{title}</div>
+              <div className="font-bold">
+                {title.length > 50 ? `${title.substring(0, 20)}...` : title}
+              </div>
               <div className="text-sm opacity-50">Author: {name}</div>
             </div>
           </div>

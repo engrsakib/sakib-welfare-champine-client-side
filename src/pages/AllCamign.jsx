@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import AllCmapTable from "../components/AllCmapTable";
+import { Helmet } from "react-helmet";
 
 const AllCamign = () => {
   
@@ -80,6 +81,10 @@ const AllCamign = () => {
           ))}
         </table>
       </div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>All Campagion</title>
+      </Helmet>
     </div>
   );
 };

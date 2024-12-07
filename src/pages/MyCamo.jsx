@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import MyCampCard from "../components/MyCampCard";
 import AllCmapTable from "../components/AllCmapTable";
+import { Helmet } from "react-helmet";
 
 const MyCamo = () => {
   const { user, dark } = useContext(AuthContext);
@@ -55,6 +56,10 @@ const MyCamo = () => {
           ))}
         </table>
       </div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>My Campagion</title>
+      </Helmet>
     </div>
   );
 };

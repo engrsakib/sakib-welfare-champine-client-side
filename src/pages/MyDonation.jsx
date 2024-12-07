@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../provider/AuthProvider';
 import MyFund from './MyFund';
+import { Helmet } from 'react-helmet';
 
 const MyDonation = () => {
     const { user, dark } = useContext(AuthContext);
@@ -37,6 +38,10 @@ const MyDonation = () => {
             <MyFund key={fund._id} fund={fund}></MyFund>
           ))}
         </section>
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>My Donations</title>
+        </Helmet>
       </div>
     );
 };

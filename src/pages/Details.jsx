@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 const Details = () => {
   const { dark, setActive, active } = useContext(AuthContext);
@@ -148,6 +149,10 @@ const Details = () => {
           </ul>
         </div>
       </div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Donations Details</title>
+      </Helmet>
     </>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 const AddCap = () => {
     const {user} = useContext(AuthContext)
   const [formData, setFormData] = useState({
@@ -24,7 +25,7 @@ const AddCap = () => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
+    
       // Parse minimumMoney and moneyNedd to numbers
       const payload = {
         ...formData,
@@ -32,47 +33,51 @@ const AddCap = () => {
         moneyNedd: parseFloat(formData.moneyNedd),
       };
 
-      const response = await fetch("http://localhost:5000/donations", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      if (response.ok) {
-        const result = await response.json();
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Your campaign has been saved",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        console.log("Server Response:", result);
-        setFormData({
-          name: user.name,
-          mail: user.mail,
-          title: "",
-          photoURL: "",
-          type: "",
-          description: "",
-          moneyNedd: "",
-          minimumMoney: "",
-          deadline: "",
-        });
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Something went wrong!",
-        });
-      }
-    } catch (error) {
       Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Something went wrong!",
+        title: "Do you want to save?",
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: "Save",
+        denyButtonText: `Don't save`,
+      }).then(async(result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          
+          const response = await fetch("http://localhost:5000/donations", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+
+          if (response.ok) {
+            const result = await response.json();
+            Swal.fire("Saved!", "", "success");
+            console.log("Server Response:", result);
+            setFormData({
+              name: user.name,
+              mail: user.mail,
+              title: "",
+              photoURL: "",
+              type: "",
+              description: "",
+              moneyNedd: "",
+              minimumMoney: "",
+              deadline: "",
+            });
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Something went wrong!",
+            });
+          }
+
+        } else if (result.isDenied) {
+          Swal.fire("Data are not saved", "", "info");
+        }
       });
-    }
+    
+    
   };
 
 
@@ -203,6 +208,12 @@ const AddCap = () => {
             name="deadline"
             value={formData.deadline}
             onChange={handleChange}
+            min={new Date().toISOString().split("T")[0]} // Current date as the minimum
+            max={
+              new Date(new Date().setDate(new Date().getDate() + 240))
+                .toISOString()
+                .split("T")[0]
+            } // Current date + 240 days as the maximum
             className="input input-bordered w-full"
             required
           />
@@ -215,6 +226,10 @@ const AddCap = () => {
           </button>
         </div>
       </form>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Add Campagion</title>
+      </Helmet>
     </div>
   );
 };
