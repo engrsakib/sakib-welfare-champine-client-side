@@ -50,7 +50,7 @@ const AllCamign = () => {
     <div>
       <div className="text-center flex justify-between">
         <h2 className="text-4xl font-bold text-orange-500 justify-center">
-          All Campagion
+          All Campagion {data.length}
         </h2>
         <button onClick={handleSort} className="btn btn-warning justify-end">
           Sort

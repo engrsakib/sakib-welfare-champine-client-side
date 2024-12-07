@@ -33,18 +33,13 @@ const LogIn = () => {
         // Signed in
         const user = userCredential.user;
         setUser(user);
-        Swal.fire(`successfully LogInd!`);
+        Swal.fire("LogIn successed", "", "success");
         navigate(location.state ? location.state : '/');
         // ...
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Mail or password is wrong!",
-        });
+       
+        Swal.fire("Mail or password is wrong", "", "info");
 
       });
   };

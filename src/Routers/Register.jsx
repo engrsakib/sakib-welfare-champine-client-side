@@ -3,7 +3,7 @@ import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { AuthContext } from "../provider/AuthProvider";
 import { toast } from "react-toastify";
 import Google from "../components/Google";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const Register = () => {
@@ -82,7 +82,7 @@ const Register = () => {
           .then((data) => {
             // console.log(newUser);
             setUser(newUser);
-            Swal.fire("User create successfullya and LogIn!");
+            Swal.fire("User create successfully and LogIn!");
             setLoadding(true);
             setTimeout(() => {
               setLoadding(false);
@@ -94,7 +94,7 @@ const Register = () => {
         // const errorCode = error.code;
         // const errorMessage = error.message;
         // console.log(errorCode, errorMessage);
-        toast.warning("Your mail is all ready exsit");
+        Swal.fire("Your mail is aleady exist", "", "info");
         // ..
       });
   };
@@ -192,6 +192,18 @@ const Register = () => {
             <button type="submit" className="btn btn-primary w-full">
               Register
             </button>
+
+            <div className="mt-6 text-center">
+              <p className="text-sm text-gray-600">
+                already have an account?{" "}
+                <Link
+                  to={`/auth/login`}
+                  className="text-blue-500 hover:underline font-semibold"
+                >
+                  LogIn
+                </Link>
+              </p>
+            </div>
           </form>
           <Google></Google>
         </div>

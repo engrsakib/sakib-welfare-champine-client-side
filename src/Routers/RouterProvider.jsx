@@ -15,6 +15,7 @@ import Update from "../components/Update";
 import Donated from "../components/Donated";
 import Fourzero from "../components/Fourzero";
 import Public from "./Public";
+import Profile from "../pages/Profile";
 
 const router = createBrowserRouter([
   {
@@ -103,6 +104,14 @@ const router = createBrowserRouter([
         element: (
           <Privete>
             <MyCamo></MyCamo>
+          </Privete>
+        ),
+      },
+      {
+        path: "/auth/users/profile",
+        element: (
+          <Privete>
+            <Profile></Profile>
           </Privete>
         ),
       },

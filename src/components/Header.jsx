@@ -5,17 +5,35 @@ import { GoSun } from "react-icons/go";
 import { FaMoon } from "react-icons/fa";
 import { auth } from "../Firebase/firebase.congig";
 import { signOut } from "firebase/auth";
+import Swal from "sweetalert2";
 
 const Header = () => {
   const {setdark, dark, user} = useContext(AuthContext);
   const singOut = ()=>{
-    signOut(auth)
-      .then(() => {
-        // Sign-out successful.
-      })
-      .catch((error) => {
-        // An error happened.
-      });
+
+    Swal.fire({
+      title: "Are You want to Sing Out",
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: "SignOut",
+      denyButtonText: `Cancel`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        signOut(auth)
+          .then(() => {
+            // Sign-out successful.
+            Swal.fire("SingOut!", "", "success");
+          })
+          .catch((error) => {
+            // An error happened.
+          });
+
+      } else if (result.isDenied) {
+        Swal.fire("You are stay LogIn", "", "info");
+      }
+    });
+    
   }
   const handletheme = ()=>{
     setdark(!dark)
@@ -141,7 +159,7 @@ const Header = () => {
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
               >
                 <li>
-                  <a className="justify-between">{user?.name}</a>
+                  <Link to={`/auth/users/profile`} className="justify-between">{user?.name}</Link>
                 </li>
                 <li>
                   <button onClick={singOut}>Logout</button>
@@ -155,7 +173,7 @@ const Header = () => {
                 LogIn
               </Link>
               <Link to={`/auth/register`} className="btn join-item">
-                SignUp
+                SignIn
               </Link>
             </div>
           )}

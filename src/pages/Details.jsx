@@ -8,6 +8,7 @@ const Details = () => {
   const { dark, setActive, active } = useContext(AuthContext);
   const data = useLoaderData();
   const navigate = useNavigate();
+  const {user} = useContext(AuthContext);
   // console.log(data[0])
   const {
     _id,
@@ -59,7 +60,15 @@ const Details = () => {
   // donetation section handel
   const handleDonate = (id)=>{
     if(active){
-        
+       
+      if (name === user.name) {
+        Swal.fire({
+          icon: "error",
+          title: "Donation Faild",
+          text: `You can't donated in your own campagion`,
+        });
+        return;
+      }
       navigate(`/donation/all-campagion/details/donated/${id}`);
 
         

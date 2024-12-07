@@ -4,9 +4,11 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  GoogleAuthProvider,
 } from "firebase/auth";
 import { auth } from "../Firebase/firebase.congig";
 import Loading from "../components/Loading";
+import { signInWithPopup } from "firebase/auth";
 
 export const AuthContext = createContext(null);
 
@@ -35,13 +37,16 @@ const AuthProvider = ({ children }) => {
   const [loadding, setLoadding] = useState(true);
   // console.log(user?.email);
 
+  const provider = new GoogleAuthProvider();
+
   // observerd
   useEffect(() => {
     const subscribe = onAuthStateChanged(auth, (Currentuser) => {
       setUser(Currentuser);
       setTimeout(() => {
         setLoadding(false);
-      }, 200);
+      }, 1000);
+
       if (Currentuser?.email) {
         fetch(
           `https://sakib-welfare-champine-server.vercel.app/users/${Currentuser?.email}`
@@ -61,6 +66,9 @@ const AuthProvider = ({ children }) => {
   if (loadding) {
     return <Loading></Loading>;
   }
+
+  // singin popup
+ 
 
   //Register by email and password
   const crateMailPassword = (mail, password) => {

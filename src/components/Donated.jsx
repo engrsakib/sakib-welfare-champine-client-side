@@ -34,6 +34,7 @@ const Donated = () => {
       });
       return;
     }
+    
 
     // Prepare data to send to backend
     const donationData = {
@@ -117,7 +118,7 @@ const Donated = () => {
             <label className="block text-left text-sm font-medium">Email</label>
             <input
               type="email"
-              value={mail || ""}
+              value={user?.mail || ""}
               readOnly
               className="input input-bordered w-full"
             />
