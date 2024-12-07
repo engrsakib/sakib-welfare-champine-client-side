@@ -39,13 +39,12 @@ const Google = () => {
           })
             .then((res) => res.json())
             .then((data) => {
-              Swal.fire("User created successfully and logged in!");
-              setUser(newUser);
               setLoadding(true);
-              setTimeout(() => {
-                setLoadding(false);
-              }, 3000);
+              setUser(newUser);
+              Swal.fire("User LogIn success", "", "success");
+              setLoadding(false);
               navigate("/");
+             
             })
             .catch((error) => {
               console.error("Error saving user:", error);

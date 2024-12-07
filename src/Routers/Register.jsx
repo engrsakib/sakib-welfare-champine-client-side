@@ -81,13 +81,12 @@ const Register = () => {
           .then((res) => res.json())
           .then((data) => {
             // console.log(newUser);
-            setUser(newUser);
-            Swal.fire("User create successfully and LogIn!");
             setLoadding(true);
-            setTimeout(() => {
-              setLoadding(false);
-            }, 1000);
-            navigate("/");
+            setUser(newUser);
+           Swal.fire("user create success", "", "success");
+           setLoadding(false);
+           navigate("/");
+            
           });
       })
       .catch((error) => {
