@@ -3,7 +3,7 @@
 A web platform dedicated to supporting community initiatives through donation management and campaign creation.
 
 ## Live Site
-[Visit Sakib Welfare](https://engrsakib-p-hero-assignment9.surge.sh/)
+[Visit Sakib Welfare live](https://sakib-welfare-champine.netlify.app/)
 
 ## GitHub Repositories
 - **Server Repository:** [b10-a10-server-side-engrsakib](https://github.com/engrsakib/sakib-welfare-champine-server-side)
