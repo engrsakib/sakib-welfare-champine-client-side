@@ -9,6 +9,7 @@ import {
 import { auth } from "../Firebase/firebase.congig";
 import Loading from "../components/Loading";
 import { signInWithPopup } from "firebase/auth";
+import axios from "axios";
 
 export const AuthContext = createContext(null);
 
@@ -54,6 +55,17 @@ const AuthProvider = ({ children }) => {
           .then((res) => res.json())
           .then((data) => setUser(data[0]));
       }
+      axios
+        .post(
+          "https://sakib-welfare-champine-server.vercel.app/jwt",
+          Currentuser,
+          {
+            withCredentials: true,
+          }
+        )
+        .then((data) => {
+          console.log(data.data);
+        });
     });
 
     return () => {
@@ -68,7 +80,6 @@ const AuthProvider = ({ children }) => {
   }
 
   // singin popup
- 
 
   //Register by email and password
   const crateMailPassword = (mail, password) => {

@@ -83,10 +83,9 @@ const Register = () => {
             // console.log(newUser);
             setLoadding(true);
             setUser(newUser);
-           Swal.fire("user create success", "", "success");
-           setLoadding(false);
-           navigate("/");
-            
+            Swal.fire("user create success", "", "success");
+            setLoadding(false);
+            navigate("/");
           });
       })
       .catch((error) => {

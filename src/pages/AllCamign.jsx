@@ -4,6 +4,7 @@ import { AuthContext } from "../provider/AuthProvider";
 import AllCmapTable from "../components/AllCmapTable";
 import { Helmet } from "react-helmet";
 import Loading from "../components/Loading";
+import axios from "axios";
 
 const AllCamign = () => {
   const { dark, user } = useContext(AuthContext);
@@ -17,10 +18,21 @@ const AllCamign = () => {
 
   useEffect(() => {
     setLoadding(true);
-    fetch(`https://sakib-welfare-champine-server.vercel.app/donations`)
-      .then((res) => res.json())
+    // fetch(`https://sakib-welfare-champine-server.vercel.app/donations`)
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     setData(data); // Update state with fetched data
+    //     setLoadding(false); // End loadding
+    //   })
+    //   .catch((err) => {
+    //     console.error(err);
+    //     setLoadding(false); // End loadding even on error
+    //   });
+
+    axios
+      .get("https://sakib-welfare-champine-server.vercel.app/donations")
       .then((data) => {
-        setData(data); // Update state with fetched data
+        setData(data.data); // Update state with fetched data
         setLoadding(false); // End loadding
       })
       .catch((err) => {

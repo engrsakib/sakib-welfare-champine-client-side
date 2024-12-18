@@ -34,7 +34,6 @@ const Donated = () => {
       });
       return;
     }
-    
 
     // Prepare data to send to backend
     const donationData = {

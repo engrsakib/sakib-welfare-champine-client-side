@@ -3,6 +3,7 @@ import { AuthContext } from "../provider/AuthProvider";
 import MyFund from "./MyFund";
 import { Helmet } from "react-helmet";
 import Loading from "../components/Loading";
+import axios from "axios";
 
 const MyDonation = () => {
   const { user, dark } = useContext(AuthContext);
@@ -12,12 +13,23 @@ const MyDonation = () => {
   useEffect(() => {
     if (user?.mail) {
       setLoadding(true);
-      fetch(
-        `https://sakib-welfare-champine-server.vercel.app/myMoney/${user.mail}`
-      )
-        .then((res) => res.json())
+      // fetch(`https://sakib-welfare-champine-server.vercel.app/myMoney/${user.mail}`)
+      //   .then((res) => res.json())
+      //   .then((data) => {
+      //     setDonations(data);
+      //     setLoadding(false);
+      //   })
+      //   .catch((err) => {
+      //     console.error(err);
+      //     setLoadding(false);
+      //   });
+      axios
+        .get(
+          `https://sakib-welfare-champine-server.vercel.app/myMoney/${user.mail}`,
+          { withCredentials: true }
+        )
         .then((data) => {
-          setDonations(data);
+          setDonations(data.data);
           setLoadding(false);
         })
         .catch((err) => {
@@ -34,7 +46,9 @@ const MyDonation = () => {
   return (
     <div>
       <div className="text-center">
-        <h2 className="text-4xl font-bold text-orange-500">My Donations {donation.length}</h2>
+        <h2 className="text-4xl font-bold text-orange-500">
+          My Donations {donation.length}
+        </h2>
       </div>
       <section className="grid mt-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {donation.map((fund) => (

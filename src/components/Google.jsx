@@ -44,7 +44,6 @@ const Google = () => {
               Swal.fire("User LogIn success", "", "success");
               setLoadding(false);
               navigate("/");
-             
             })
             .catch((error) => {
               console.error("Error saving user:", error);
