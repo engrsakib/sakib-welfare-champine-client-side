@@ -54,6 +54,16 @@ const AuthProvider = ({ children }) => {
         )
           .then((res) => res.json())
           .then((data) => setUser(data[0]));
+      } else {
+        axios
+          .post(
+            "https://sakib-welfare-champine-server.vercel.app/logout",
+            {},
+            {
+              withCredentials: true,
+            }
+          )
+          .then((res) => console.log(res.data));
       }
       axios
         .post(

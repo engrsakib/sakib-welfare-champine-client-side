@@ -26,7 +26,9 @@ const MyDonation = () => {
       axios
         .get(
           `https://sakib-welfare-champine-server.vercel.app/myMoney/${user.mail}`,
-          { withCredentials: true }
+          {
+            withCredentials: true,
+          }
         )
         .then((data) => {
           setDonations(data.data);
